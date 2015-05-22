@@ -10,3 +10,29 @@ body {
     background: #fff;
     overflow: auto;
 }
+
+p {
+    margin: 10px 0;
+    line-height: 1.5em;
+}
+
+h1 {
+    font-size: 39px;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+    line-height: 1.2em;
+}
+
+h3 {
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+h4 {
+    font-size: 19px;
+    margin: 10px 0;
+}
+
+strong {
+    font-weight: bold;
+}
