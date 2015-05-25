@@ -5,8 +5,9 @@ NodeJS/Express Websocket Push Example, extracted out of [ws/example](https://git
     WORKSPACE=$HOME/Workspace
     cd /tmp
     git clone https://github.com/websockets/ws
-    cd $WORKSPACE
     git clone https://github.com/nkoster/wspush
+    cd $WORKSPACE
+    mv /tmp/wspush .
     cd wspush
     mv /tmp/ws/lib .
     
