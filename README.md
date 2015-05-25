@@ -1,6 +1,6 @@
 # training
 
-.. CSS Training
+1. CSS Training
 ... Here a collection of the files I'm producing during my Udemy online CSS course.
-.. wspush
+1. wspush
 ... A simple Websocket "push" example, shamelessly stolen from [ws](https://github.com/websockets/ws)
