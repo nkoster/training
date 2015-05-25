@@ -36,3 +36,7 @@ h4 {
 strong {
     font-weight: bold;
 }
+
+.clearfix {
+    clear: both;
+}
