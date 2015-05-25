@@ -2,4 +2,4 @@
 
 ### CSS Training
 
-Here I collect the files I produced during my Udemy online CSS course.
+Here a collection of the files I'm producing during my Udemy online CSS course.
