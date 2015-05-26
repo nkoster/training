@@ -32,10 +32,9 @@ net.createServer(function(sock) {
     
     console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
     sock.on('data', function(data) {
-        dataToSend = data;
-        console.log('DATA ' + sock.remoteAddress + ': ' + data);
         var dataString = "" + data;
         dataToSend = dataString.replace(/(\r\n|\n|\r)/, '');
+        console.log('DATA ' + sock.remoteAddress + ': ' + dataToSend);
         sock.write('You said "' + dataToSend + '"' + "\n");
     });
     
