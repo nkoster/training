@@ -2,6 +2,8 @@
 
 Work in progress!
 
+* Working now: `telnet` to 6969 goes to http://localhost:8080 (wow!)
+
 Set up:
 
     WORKSPACE=$HOME/Workspace
