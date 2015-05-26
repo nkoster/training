@@ -2,7 +2,7 @@
 
 Work in progress!
 
-* Working now: `telnet` to 6969 goes to http://localhost:8080 (wow!)
+* Working now: `telnet localhost 6969` goes to http://localhost:8080 (wow, I love it!)
 
 Set up:
 
