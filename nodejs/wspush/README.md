@@ -9,7 +9,7 @@ Set up:
     git clone https://github.com/websockets/ws
     git clone https://github.com/nkoster/training
     cd $WORKSPACE
-    mv /tmp/training/wspush .
+    mv /tmp/training/nodejs/wspush .
     cd wspush
     mv /tmp/ws/lib .
     npm install --save ultron
