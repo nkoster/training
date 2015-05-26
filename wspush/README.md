@@ -2,7 +2,7 @@
 
 NodeJS/Express Websocket Push Example, extracted out of [ws/example](https://github.com/websockets/ws/tree/master/examples/serverstats), as a baseline for my future "Monitor Screen" project.
 
-Set-up:
+Set up:
 
     WORKSPACE=$HOME/Workspace
     cd /tmp
