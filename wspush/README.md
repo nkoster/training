@@ -7,9 +7,9 @@ Set-up:
     WORKSPACE=$HOME/Workspace
     cd /tmp
     git clone https://github.com/websockets/ws
-    git clone https://github.com/nkoster/wspush
+    git clone https://github.com/nkoster/training
     cd $WORKSPACE
-    mv /tmp/wspush .
+    mv /tmp/training/wspush .
     cd wspush
     mv /tmp/ws/lib .
     npm install --save ultron
