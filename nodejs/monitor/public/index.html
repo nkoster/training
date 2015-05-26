@@ -17,9 +17,9 @@
         monitor[counter] = dataReceived;
         var div = "";
         for (i = 0; i < monitor.length; i++) {
-           div += '<br>' + i + ': ' + monitor[i];
+           div += i + ': ' + monitor[i] + "<br>\n";
         }
-	document.getElementById('test').innerHTML = "" + div;
+	document.getElementById('monitor').innerHTML = "" + div;
 	if (counter < 10) {
           counter += 1
         } else {
@@ -34,6 +34,6 @@
     </script>
   </head>
   <body>
-  <div id="test">TEST</div><br>
+  <div id="monitor"></div><br>
   </body>
 </html>
