@@ -1,6 +1,6 @@
 # wspush
 
-Very simple NodeJS/Express Websocket Push Example, extracted out of [ws/example](https://github.com/websockets/ws/tree/master/examples/serverstats), as a baseline for my future "Monitor Screen" project.
+Very simple NodeJS/Express Websocket push example, extracted out of [ws/example](https://github.com/websockets/ws/tree/master/examples/serverstats), as a baseline for my future "Monitor Screen" project.
 
 Set up:
 
