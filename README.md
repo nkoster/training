@@ -4,3 +4,5 @@
 * nodejs/monitor - Telnet + Websocket Realtime Logging (Work in progress!)
 * nodejs/wspush - A simple Websocket "push" example, shamelessly stolen from [ws](https://github.com/websockets/ws)
 * nodejs/tcp_server - A simple TCP server example
+
+The nodejs stuff assumes that you have _nodejs_ and _express_ available.
