@@ -10,7 +10,7 @@ net.createServer(function(sock) {
         
         console.log('DATA ' + sock.remoteAddress + ': ' + data);
         var dataString = "" + data;
-        sock.write('You said "' + dataString.replace(/(\r\n|\n|\r)/, '') + '"');
+        sock.write('You said "' + dataString.replace(/(\r\n|\n|\r)/, '') + '"' + "\n");
         
     });
     
