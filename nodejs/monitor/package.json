@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "options": "0.0.6",
+    "ultron": "~1.0.1"
+  }
+}

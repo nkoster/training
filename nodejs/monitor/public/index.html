@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Tahoma, Geneva, sans-serif;
+      }
+
+      div {
+        display: inline;
+      }
+    </style>
+    <script>
+      function updateStats(dataReceived) {
+        document.getElementById('test').innerHTML = dataReceived;
+      }
+      var host = window.document.location.host.replace(/:.*/, '');
+      var ws = new WebSocket('ws://' + host + ':8080');
+      ws.onmessage = function (event) {
+        updateStats(event.data);
+      };
+    </script>
+  </head>
+  <body>
+  <div id="test">TEST</div><br>
+  </body>
+</html>
