@@ -23,6 +23,14 @@ Run:
 
 Test:
 
-    echo aap | nc localhost 6969
+    echo hello | nc localhost 6969
+
+or
+
+    for n in {1..25} ; do echo $(date) | nc localhost 6969 ; sleep 1 ; done
+
+or
+
+    ssh webserver 'tail -f /var/log/nginx/access_log' | nc localhost 6969
 
 See result: browse to [http://localhost:8080](http://localhost:8080)
