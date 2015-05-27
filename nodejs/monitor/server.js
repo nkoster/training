@@ -15,7 +15,7 @@ wss.on('connection', function(ws) {
   var id = setInterval(function() {
     if (dataToSend.length != "") {
       ws.send(dataToSend, function() { /* ignore errors */ });
-      console.log('DATA changed and send');
+      console.log('DATA changed and sent');
       dataToSend = "";
     }
   }, 100);
