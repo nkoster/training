@@ -25,4 +25,4 @@ Test:
 
     echo aap | nc localhost 6969
 
-See result: browse to http://localhost:8080
+See result: browse to [http://localhost:8080](http://localhost:8080)
