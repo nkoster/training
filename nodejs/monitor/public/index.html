@@ -14,7 +14,7 @@
       var monitor = [];
       var counter = 0;
       var numberOfLines = 10;
-      function updateStats(dataReceived) {
+      function updateMonitor(dataReceived) {
         monitor[counter] = dataReceived;
         var div = "";
         for (i = 0; i < monitor.length; i++) {
@@ -30,7 +30,7 @@
       var host = window.document.location.host.replace(/:.*/, '');
       var ws = new WebSocket('ws://' + host + ':8080');
       ws.onmessage = function (event) {
-        updateStats(event.data);
+        updateMonitor(event.data);
       };
     </script>
   </head>
