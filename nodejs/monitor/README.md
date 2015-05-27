@@ -20,3 +20,9 @@ Set up:
 Run:
 
     node server.js
+
+Test:
+
+    echo aap | nc localhost 6969
+
+See result: browse to http://localhost:8080
