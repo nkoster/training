@@ -13,12 +13,12 @@
     <script>
       var monitor = [];
       var counter = 0;
-      var numberOfLines = 10;
+      var numberOfLines = 30;
       function updateMonitor(dataReceived) {
         monitor[counter] = dataReceived;
         var div = "";
         for (i = 0; i < monitor.length; i++) {
-           div += i + ': ' + monitor[i] + "<br>\n";
+           div += '' + monitor[i].substring(1, 80) + "<br>\n";
         }
 	document.getElementById('monitor').innerHTML = "" + div;
 	if (counter < (numberOfLines - 1)) {
