@@ -14,8 +14,7 @@ Set up:
     mv /tmp/training/nodejs/monitor .
     cd monitor
     mv /tmp/ws/lib .
-    npm install --save ultron
-    npm install --save options
+    npm install
 
 Run:
 
@@ -34,3 +33,5 @@ or
     ssh webserver 'tail -f /var/log/nginx/access_log' | nc localhost 6969
 
 See result: browse to [http://localhost:8080](http://localhost:8080)
+
+What you have: data that comes in via 6969 is broadcasted to every connected WebSocket client, into the 'ws' object in  `public/index.html`
