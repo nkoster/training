@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "options": "0.0.6",
-    "ultron": "~1.0.1"
+    "ultron": "~1.0.1",
+    "express": "2.5.8"
   }
 }
