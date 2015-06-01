@@ -33,10 +33,4 @@ or
 
     ssh webserver 'tail -f /var/log/nginx/access_log' | nc localhost 6969
 
-or
-
-    ssh webserver 'tail -f /var/log/nginx/access_log' | nc localhost 6969 >/dev/null
-
-to get rid of the screen output.
-
 See result: browse to [http://localhost:8080](http://localhost:8080)
