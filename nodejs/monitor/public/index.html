@@ -4,10 +4,14 @@
     <style>
       body {
         font-family: Tahoma, Geneva, sans-serif;
+        background: black;
       }
 
       div {
         display: inline;
+      }
+      .monitor {
+        font-family: courier, 'Courier New';
       }
     </style>
     <script>
@@ -18,7 +22,16 @@
         monitor[counter] = dataReceived;
         var div = "";
         for (i = 0; i < monitor.length; i++) {
-           div += '' + monitor[i].substring(1, 80) + "<br>\n";
+           var mon_data = monitor[i].split(',');
+           elapsed = parseFloat(mon_data[0].replace(/"/g, ''));
+           var color = '#0f0';
+           if (elapsed > 0.5) color = '#fa0';
+           if (elapsed > 1) color = '#f00';
+           timeStamp = mon_data[1].replace(/"/g, '').substring(9);
+           IPAddress = mon_data[2].replace(/"/g, '');
+           var weight = 'normal';
+           if (i == counter) weight = "bold";
+           div += '<span class="monitor" style="color:' + color + ';font-weight:' + weight + '">' + timeStamp + ' ' + elapsed + ' ' + IPAddress + ' ' + mon_data[3] + ' ' + mon_data[4] + ' ' + mon_data[5] + "</span><br>\n";
         }
 	document.getElementById('monitor').innerHTML = "" + div;
 	if (counter < (numberOfLines - 1)) {
