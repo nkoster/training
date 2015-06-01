@@ -32,4 +32,4 @@ or
 
 See result: browse to [http://localhost:8080](http://localhost:8080)
 
-What do you have now? Data that comes in via 6969 is broadcasted to every connected WebSocket client, into the 'ws' object in  `public/index.html`!
+What do you have now? Data that comes in via 6969 is broadcasted _directly_ to every connected WebSocket client, into the 'ws' object in  `public/index.html`! No polling or whatever, completely event driven.
