@@ -1,8 +1,6 @@
 # monitor
 
-Work in progress!
-
-* Working now: `telnet localhost 6969` goes to http://localhost:8080 (wow, I love it!)
+In this example: `telnet localhost 6969` goes _directly_ to http://localhost:8080 (wow, I love it!)
 
 Set up:
 
