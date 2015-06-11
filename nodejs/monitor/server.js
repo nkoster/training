@@ -1,3 +1,20 @@
+#!/usr/bin/env node
+
+var host = '127.0.0.1';
+if (process.argv.indexOf("-h") != -1) {
+  host = process.argv[process.argv.indexOf("-h") + 1];
+}
+
+var port_telnet = 21000;
+if (process.argv.indexOf("-t") != -1) {
+  port_telnet = process.argv[process.argv.indexOf("-t") + 1]; 
+}
+
+var port_web = 8000;
+if (process.argv.indexOf("-w") != -1) {
+  port_web = process.argv[process.argv.indexOf("-w") + 1]; 
+}
+
 var net = require('net');
 
 var WebSocketServer = require('./').Server
@@ -6,7 +23,7 @@ var WebSocketServer = require('./').Server
   , app = express.createServer();
 
 app.use(express.static(__dirname + '/public'));
-app.listen(8080);
+app.listen(port_web);
 
 var log = false;
 
@@ -18,9 +35,6 @@ wss.on('connection', function(ws) {
     if (log) console.log('Client Closed');
   });
 });
-
-var HOST = '127.0.0.1';
-var PORT = 6969;
 
 net.createServer(function(sock) {
   if (log) console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
@@ -36,7 +50,7 @@ net.createServer(function(sock) {
   sock.on('close', function(data) {
     if (log) console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
   });
-}).listen(PORT, HOST);
+}).listen(port_telnet, host);
 
-console.log('Server listening on ' + HOST +':'+ PORT);
+console.log('Server listening on ' + host +':'+ port_telnet);
 
