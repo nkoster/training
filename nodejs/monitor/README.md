@@ -1,6 +1,6 @@
 # monitor
 
-In this example: `telnet localhost 21000` goes _directly_ to http://localhost:8080 (wow, I love it!)
+Pipe `telnet localhost 21000`  _directly_ into http://localhost:8000
 
 Set up:
 
