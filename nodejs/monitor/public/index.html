@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      body {
-        font-family: Tahoma, Geneva, sans-serif;
-      }
+<head>
+<style>
+body {
+  font-family: Tahoma, Geneva, sans-serif;
+}
 
-      div {
-        display: inline;
-      }
-    </style>
-    <script>
-      var monitor = [];
-      var counter = 0;
-      var numberOfLines = 30;
-      function updateMonitor(dataReceived) {
-        monitor[counter] = dataReceived;
-        var div = "";
-        for (i = 0; i < monitor.length; i++) {
-           div += '' + monitor[i].substring(1, 80) + "<br>\n";
-        }
-	document.getElementById('monitor').innerHTML = "" + div;
-	if (counter < (numberOfLines - 1)) {
-          counter += 1
-        } else {
-          counter =0
-        }
-      }
-      var host = window.document.location.host.replace(/:.*/, '');
-      var ws = new WebSocket('ws://' + host + ':8080');
-      ws.onmessage = function (event) {
-        updateMonitor(event.data);
-      };
-    </script>
-  </head>
-  <body>
-  <div id="monitor"></div><br>
-  </body>
+div {
+  display: block;
+}
+.monitor {
+  white-space: pre;
+}
+</style>
+<script>
+var monitor = [];
+var counter = 0;
+var numberOfLines = 66;
+function updateMonitor(dataReceived) {
+  monitor[counter] = '' + dataReceived;
+  var div = "";
+  for (i = 0; i < monitor.length; i++) {
+     div += '<div class="monitor">' + monitor[i] + "</div>\n";
+  }
+  document.getElementById('monitor').innerHTML = '' + div;
+  if (counter < (numberOfLines - 1)) {
+    counter++
+  } else {
+    counter =0
+  }
+}
+var host = window.document.location.host.replace(/:.*/, '');
+var ws = new WebSocket('ws://' + host + ':8080');
+ws.onmessage = function (event) {
+  updateMonitor(event.data);
+};
+</script>
+</head>
+<body>
+<div id="monitor"></div><br>
+</body>
 </html>
