@@ -1,0 +1,62 @@
+body {
+  font-family: Tahoma, Geneva, sans-serif;
+  background: black;
+  margin: 0px;
+}
+
+.monitor {
+  font-family: "Lucida Console", Monaco, monospace, Courier, 'Courier New';
+  font-size: 13px;
+  white-space: nowrap;
+  white-space: pre;
+  padding-left: 3px;
+  overflow: hidden;
+}
+
+#monitor {
+  overflow: hidden;
+  line-height: 17px;
+  z-index:20;
+  position:absolute;
+  left:0px;
+  top:5px;
+  bottom:0px;
+  width:100%;
+  height:100%
+}
+
+#bgvid {
+  position:fixed;
+  right:0;
+  bottom:0;
+  min-width:100%;
+  min-height:100%;
+  width:auto;
+  height:auto;
+  z-index:0;
+}
+
+#l1 {
+  z-index:10;
+  position:fixed;
+  overflow: hidden;
+  left:0;
+  top:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  background:url('/pix/blackgrid2.png') repeat;
+}
+
+#l2 {
+  z-index:15;
+  position:fixed;
+  overflow: hidden;
+  left:0;
+  top:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  background:black;
+  opacity:0.8;
+}
