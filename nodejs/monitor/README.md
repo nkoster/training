@@ -6,6 +6,8 @@ Pipe `telnet localhost 21000`  _directly_ into http://localhost:8000
 
 Set up:
 
+    sudo npm install -g express
+    sudo npm install -g gulp
     WORKSPACE=$HOME/Workspace
     cd /tmp
     git clone https://github.com/websockets/ws
@@ -37,3 +39,9 @@ or
 See result: browse to [http://localhost:8000](http://localhost:8000)
 
 Data that comes in via 21000 is broadcasted _directly_ to every connected WebSocket client, into the 'ws' object in  `public/index.html`! No polling or whatever, just non-blocking i/o in an event loop.
+
+# Gulp
+
+For ease of development, I've included a small Gulp set-up:
+
+    gulp watch:js
