@@ -5,12 +5,12 @@ if (process.argv.indexOf("-h") != -1) {
   host = process.argv[process.argv.indexOf("-h") + 1];
 }
 
-var port_telnet = 21000;
+var port_telnet = 6969;
 if (process.argv.indexOf("-t") != -1) {
   port_telnet = process.argv[process.argv.indexOf("-t") + 1]; 
 }
 
-var port_web = 8000;
+var port_web = 8080;
 if (process.argv.indexOf("-w") != -1) {
   port_web = process.argv[process.argv.indexOf("-w") + 1]; 
 }
@@ -41,6 +41,13 @@ net.createServer(function(sock) {
   sock.on('data', function(data) {
     var dataToSend = '' + data;
     dataToSend = dataToSend.replace(/(\r\n|\n|\r)/, '');
+    var monData = dataToSend.split(' ');
+    var ipAddress = monData[2];
+    var timeStamp = '' + monData[0].substring(12);
+    var request = monData[4] + monData[7];
+    var elapsed = parseFloat(monData[3]);
+    var elapsedString = elapsed.toFixed(3);
+    dataToSend = timeStamp + ' ' + elapsedString + ' ' + ipAddress + ' ' + request;
     wss.clients.forEach(function (conn) {
       conn.send(dataToSend, function() { /* no error handling */ });
     })

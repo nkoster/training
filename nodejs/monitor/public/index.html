@@ -1,43 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-body {
-  font-family: Tahoma, Geneva, sans-serif;
-}
-
-div {
-  display: block;
-}
-.monitor {
-  white-space: pre;
-}
-</style>
-<script>
-var monitor = [];
-var counter = 0;
-var numberOfLines = 66;
-function updateMonitor(dataReceived) {
-  monitor[counter] = '' + dataReceived;
-  var div = "";
-  for (i = 0; i < monitor.length; i++) {
-     div += '<div class="monitor">' + monitor[i] + "</div>\n";
-  }
-  document.getElementById('monitor').innerHTML = '' + div;
-  if (counter < (numberOfLines - 1)) {
-    counter++
-  } else {
-    counter =0
-  }
-}
-var host = window.document.location.host.replace(/:.*/, '');
-var ws = new WebSocket('ws://' + host + ':8080');
-ws.onmessage = function (event) {
-  updateMonitor(event.data);
-};
-</script>
+<title>W3B WebSocket Monitor</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+<div id="l0">
+<video autoplay loop id="bgvid">
+<source src="video/test.webm" type="video/webm">
+<source src="video/test.mp4" type="video/mp4">
+</video>
+</div>
+<div id="l1"></div>
+<div id="l2"></div>
 <div id="monitor"></div><br>
+<script src="assets/app.js"></script>
 </body>
 </html>
