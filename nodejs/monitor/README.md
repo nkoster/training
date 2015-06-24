@@ -54,4 +54,4 @@ Here the line from `/etc/nginx/nginx.conf`, where the NGINX access log layout is
 
     log_format main '$time_local $remote_addr $request_time $host ...';
 
-The important part here, is that the first four entities are available, and in above order. Otherwise, this project example will fail, becasue the browser Javascript handles these log entities exactly like above. The ellipsis can be replaced with whatever you need more in your access log layout.
+The important part here, is that the first four entities are available, and in above order. Otherwise, this project example will fail, because the browser Javascript that handles these log entities expects them exactly like above. The ellipsis can be replaced with whatever you need more in your access log layout.
