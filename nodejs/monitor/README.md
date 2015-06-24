@@ -38,7 +38,7 @@ or
 
     sudo tail -F /var/log/nginx/access_log | nc 127.0.0.1 6969
 
-or
+or even from a remote web server
 
     ssh webserver 'tail -F /var/log/nginx/access_log' | nc 127.0.0.1 6969
 
