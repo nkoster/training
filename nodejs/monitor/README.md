@@ -2,7 +2,9 @@
 
 Online project example: [http://141.138.138.250/](http://141.138.138.250/)
 
-Pipe `telnet localhost 21000`  _directly_ into http://localhost:8000
+Pipe `telnet 127.0.0.1 6969`  _directly_ into http://<host>:8000
+
+The updates are broadcast to the browsers via WebSocket. In this example project, updates are received from an NGINX access log file. Check the access log layout configuration below!
 
 Set up:
 
@@ -20,23 +22,23 @@ Set up:
 
 Run:
 
-    ./server.js -h 127.0.0.1 -t 21000 -w 8000
+    ./server.js -h 127.0.0.1 -t 6969 -w 8080
 
 You can omit the arguments in case you want to use the default values, this is an example.
 
 Test:
 
-    echo hello | nc localhost 21000
+    echo hello | nc 127.0.0.1 6969
 
 or
 
-    for n in {1..25} ; do echo $(date) | nc localhost 21000 ; sleep 1 ; done
+    for n in {1..25} ; do echo $(date) | nc 127.0.0.1 6969 ; sleep 1 ; done
 
 or
 
-    ssh webserver 'tail -f /var/log/nginx/access_log' | nc localhost 21000
+    ssh webserver 'tail -f /var/log/nginx/access_log' | nc 127.0.0.1 6969
 
-See result: browse to [http://localhost:8000](http://localhost:8000)
+See result: browse to [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 Data that comes in via 21000 is broadcasted _directly_ to every connected WebSocket client, into the 'ws' object in  `public/index.html`! No polling or whatever, just non-blocking i/o in an event loop.
 
@@ -45,3 +47,11 @@ Data that comes in via 21000 is broadcasted _directly_ to every connected WebSoc
 For ease of development, I've included a small Gulp set-up:
 
     gulp watch:js
+
+# NGINX Access Log
+
+Here the line from `/etc/nginx/nginx.conf`, where the log layout is configured:
+
+    log_format main '$time_local $remote_addr $request_time $host ...';
+
+The important part here, is that the first four entities are available, and in above order. Otherwise, this project example will fail, becasue the browser Javascript handles these log entities exactly like above. The ellipsis can be replaced with whatever you need more in your access log layout.
