@@ -36,9 +36,13 @@ or
 
 or
 
+    sudo tail -F /var/log/nginx/access_log | nc 127.0.0.1 6969
+
+or
+
     ssh webserver 'tail -F /var/log/nginx/access_log' | nc 127.0.0.1 6969
 
-The `-F` is to make tail servive log rotations.
+The `-F` is to make `tail` survive log rotations.
 
 See result: browse to [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
