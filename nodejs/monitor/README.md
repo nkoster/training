@@ -50,7 +50,7 @@ For ease of development, I've included a small Gulp set-up:
 
 # NGINX Access Log
 
-Here the line from `/etc/nginx/nginx.conf`, where the log layout is configured:
+Here the line from `/etc/nginx/nginx.conf`, where the NGINX access log layout is configured:
 
     log_format main '$time_local $remote_addr $request_time $host ...';
 
