@@ -1,6 +1,6 @@
 # monitor
 
-Online project example: [http://141.138.138.250:8080/](http://141.138.138.250:8080/)
+Online project example: [http://141.138.138.250/](http://141.138.138.250/)
 
 Pipe `telnet localhost 21000`  _directly_ into http://localhost:8000
 
