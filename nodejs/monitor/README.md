@@ -46,7 +46,7 @@ The `-F` is to make `tail` survive log rotations.
 
 See result: browse to [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
-Data that comes in via 21000 is broadcasted _directly_ to every connected WebSocket client, into the 'ws' object in  `public/index.html`! No polling or whatever, just non-blocking i/o in an event loop.
+Data that comes in via 6969 is broadcasted _directly_ to every connected WebSocket client, into the 'ws' object in  `public/index.html`! No polling or whatever, just non-blocking i/o in an event loop.
 
 # Gulp
 
