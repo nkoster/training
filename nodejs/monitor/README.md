@@ -2,7 +2,7 @@
 
 Online project example: [http://141.138.138.250/](http://141.138.138.250/)
 
-Pipe `telnet 127.0.0.1 6969`  _directly_ into http://<host>:8000
+Pipe `telnet 127.0.0.1 6969`  _directly_ into http://127.0.0.1:8080
 
 The updates are broadcast to the browsers via WebSocket. In this example project, updates are received from an NGINX access log file. Check the access log layout configuration below!
 
@@ -38,7 +38,7 @@ or
 
     ssh webserver 'tail -f /var/log/nginx/access_log' | nc 127.0.0.1 6969
 
-See result: browse to [http://127.0.0.1:8000](http://127.0.0.1:8000)
+See result: browse to [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
 Data that comes in via 21000 is broadcasted _directly_ to every connected WebSocket client, into the 'ws' object in  `public/index.html`! No polling or whatever, just non-blocking i/o in an event loop.
 
