@@ -2,7 +2,7 @@
 
 Online project example: [http://141.138.138.250/](http://141.138.138.250/)
 
-Pipe `telnet 127.0.0.1 6969`  _directly_ into http://127.0.0.1:8080
+The idea is: read the NGINX access log, and pipe it via Netcat into this NodeJS monitor example, and broadcast it via the WebSocket protocol to all connected browsers via an URL, thus `nc 127.0.0.1 6969`  _directly_ to http://127.0.0.1:8080
 
 The updates are broadcast to the browsers via WebSocket. In this example project, updates are received from an NGINX access log file. Check the access log layout configuration below!
 
