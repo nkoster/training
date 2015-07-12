@@ -103,7 +103,13 @@ logical "`AND`" operator. You can also use a logical "`OR`" operator
 within text arguments. Use the "**|**" for this. For example,
 "**EEMLA|EEMVA|SALTRO**" shows the lines for Eemland, Eemvallei and
 Saltro, only. You can disable a filter, and enable it again later, by
-using the "**\#**" as first character.
+using the "**\#**" as first character. When real-time filtering is
+active, a yellow alert
+"<small><span style="background:#fe0;color:#fe0;border-radius:50%">oo</span></small>"
+is in the top-right of the window, to keep you aware of the activated
+filter. Keep in mind that a filter might trigger a red time-out
+background more often, see
+[above](http://wiki.portavita.nl/wiki/index.php/De_database_en_webserver_Monitor_pagina#Time-outs_in_Browsers).
 
 Filter hints:
 
@@ -121,13 +127,6 @@ Filter hints:
 -   Make the screen very red: **\>2**
 -   Make the screen very green: **\<1**
 -   Make the screen very orange: **\>1 \<2**
-
--   When real-time filtering is active, a yellow alert
-    "<small><span style="background:#fe0;color:#fe0;border-radius:50%">oo</span></small>"
-    is in the top-right of the window, to keep you aware of the
-    activated filter. Keep in mind that a filter might trigger a red
-    time-out background more often, see
-    [above](http://wiki.portavita.nl/wiki/index.php/De_database_en_webserver_Monitor_pagina#Time-outs_in_Browsers)
 
 #### Start-up after reboot
 
