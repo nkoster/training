@@ -40,9 +40,9 @@ are automatically handled by **`npm`**. (Mac and Linux tested)
 
 Run it:
 
-`screen -mS scroll_pvprodweb01`\
-`./server.js -t 6969 -w 8080 -h 192.168.1.213 &`\
-`ssh httpd@pvprodweb01 'tail -F logs/pvt_timing.txt' | nc 192.168.1.213 6969`
+    screen -mS scroll_pvprodweb01
+    ./server.js -t 6969 -w 8080 -h 192.168.1.213 &
+    ssh httpd@pvprodweb01 'tail -F logs/pvt_timing.txt' | nc 192.168.1.213 6969
 
 Arguments are:
 
@@ -52,7 +52,7 @@ Arguments are:
 
 Forward the timing log stream to the telnet server port:
 
-`ssh httpd@pvprodweb01 'tail -F logs/pvt_timing.txt' | nc 192.168.1.213 6969`
+    ssh httpd@pvprodweb01 'tail -F logs/pvt_timing.txt' | nc 192.168.1.213 6969
 
 -   The capital **`-F`** makes **`tail`** survive log rotations
 
@@ -138,15 +138,17 @@ Lines Hub', below is an 'after reboot' manual.
 
 Log-in as user **`sysdesk`**, with the Mars password. Do:
 
-`screen -mS scroll_pvprodweb01`\
-`./server.js -t 6969 -w 8080 -h 192.168.1.213 &`\
-`ssh httpd@pvprodweb01 'tail -F logs/pvt_timing.txt' | nc 192.168.1.213 6969`
+    screen -mS scroll_pvprodweb01
+    ./server.js -t 6969 -w 8080 -h 192.168.1.213 &
+    ssh httpd@pvprodweb01 'tail -F logs/pvt_timing.txt' | nc 192.168.1.213 6969
 
 -   Press the **`Ctrl-A`** and **`Z`** key, to leave **`screen`**
 
-`screen -mS scroll_webxsprod`\
-`./server.js -t 6970 -w 8081 -h 192.168.1.213 &`\
-`ssh httpd@webxsprod 'tail -F logs/pvt_timing.txt' | nc 192.168.1.213 6970`
+<!-- -->
+
+    screen -mS scroll_webxsprod
+    ./server.js -t 6970 -w 8081 -h 192.168.1.213 &
+    ssh httpd@webxsprod 'tail -F logs/pvt_timing.txt' | nc 192.168.1.213 6970
 
 -   Press the **`Ctrl-A`** and **`Z`** key, to leave **`screen`**
 
