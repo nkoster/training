@@ -46,9 +46,9 @@ Run it:
 
 Arguments are:
 
-:   **`-t  telnet server port`**
-:   **`-w  web server port`**
-:   **`-h  host`**
+-   **`-t  telnet server port`**
+-   **`-w  web server port`**
+-   **`-h  host`**
 
 Forward the timing log stream to the telnet server port:
 
@@ -107,20 +107,20 @@ using the "**\#**" as first character.
 
 Filter hints:
 
-:   See only logged in users: **!-**
-:   See only logged in users from Saltro: **!- SALTRO**
-:   Filter within Saltro lines: **SALTRO \>0.5 !php !xml**
-:   Filter php and xml within Saltro lines: **SALTRO \>0.5 php|xml**
-:   Show only Eemland, Eemvallei and Saltro: **EEMLA|EEMVA|SALTRO**
-:   Show only Eemland, Eemvallei and Saltro slow pages:
+-   See only logged in users: **!-**
+-   See only logged in users from Saltro: **!- SALTRO**
+-   Filter within Saltro lines: **SALTRO \>0.5 !php !xml**
+-   Filter php and xml within Saltro lines: **SALTRO \>0.5 php|xml**
+-   Show only Eemland, Eemvallei and Saltro: **EEMLA|EEMVA|SALTRO**
+-   Show only Eemland, Eemvallei and Saltro slow pages:
     **EEMLA|EEMVA|SALTRO \>1**
-:   Or like this: **EEMLA|EEMVA|SALTRO \>1 \<2 php|html !/algemeen**
-:   Disable: **\#EEMLA|EEMVA|SALTRO \>1 \<2 php|html !/algemeen**
-:   Show all except Eemland, Eemvallei and Saltro: **!EEMLA !EEMVA
+-   Or like this: **EEMLA|EEMVA|SALTRO \>1 \<2 php|html !/algemeen**
+-   Disable: **\#EEMLA|EEMVA|SALTRO \>1 \<2 php|html !/algemeen**
+-   Show all except Eemland, Eemvallei and Saltro: **!EEMLA !EEMVA
     !SALTRO**
-:   Make the screen very red: **\>2**
-:   Make the screen very green: **\<1**
-:   Make the screen very orange: **\>1 \<2**
+-   Make the screen very red: **\>2**
+-   Make the screen very green: **\<1**
+-   Make the screen very orange: **\>1 \<2**
 
 -   When real-time filtering is active, a yellow alert
     "<small><span style="background:#fe0;color:#fe0;border-radius:50%">oo</span></small>"
