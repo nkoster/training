@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+process.on('uncaughtException', function(err) {
+  console.error('Server canceled: port(s) already in use?');
+  process.exit();
+});
+
 var host = '127.0.0.1';
 if (process.argv.indexOf("-h") != -1) {
   host = process.argv[process.argv.indexOf("-h") + 1];
@@ -23,6 +28,7 @@ var WebSocketServer = require('./').Server
   , app = express.createServer();
 
 app.use(express.static(__dirname + '/public'));
+
 app.listen(port_web);
 
 var log = false;
@@ -42,22 +48,24 @@ net.createServer(function(sock) {
     var dataToSend = '' + data;
     dataToSend = dataToSend.replace(/(\r\n|\n|\r)/, '');
     var monData = dataToSend.split(' ');
-    var ipAddress = monData[2];
-    var timeStamp = '' + monData[0].substring(12);
-    var request = monData[4] + monData[7];
-    var elapsed = parseFloat(monData[3]);
-    var elapsedString = elapsed.toFixed(3);
-    dataToSend = timeStamp + ' ' + elapsedString + ' ' + ipAddress + ' ' + request;
-    wss.clients.forEach(function (conn) {
-      conn.send(dataToSend, function() { /* no error handling */ });
-    })
-    if (log) console.log('DATA ' + sock.remoteAddress + ': ' + data);
-    if (log) sock.write('You said "' + data + '"' + "\n");
+    if (mon_data.length > 4) {
+      var ipAddress = monData[2];
+      var timeStamp = '' + monData[0].substring(12);
+      var request = monData[4] + monData[7];
+      var elapsed = parseFloat(monData[3]);
+      var elapsedString = elapsed.toFixed(3);
+      dataToSend = timeStamp + ' ' + elapsedString + ' ' + ipAddress + ' ' + request;
+      wss.clients.forEach(function (conn) {
+        conn.send(dataToSend, function() { /* no error handling */ });
+      })
+      if (log) console.log('DATA ' + sock.remoteAddress + ': ' + data);
+      if (log) sock.write('You said "' + data + '"' + "\n");
+    }
   });
   sock.on('close', function(data) {
     if (log) console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
   });
 }).listen(port_telnet, host);
 
-console.log('Server listening on ' + host +':'+ port_telnet);
+console.log('Server on ' + host +', receiver port is '+ port_telnet + ', web page port is ' + port_web);
 

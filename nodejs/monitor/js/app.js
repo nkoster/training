@@ -1,37 +1,31 @@
-var monitorHeight = 0;
-
-function getHeight() {
-  if (typeof(window.innerWidth) == 'number') {
-    /* normal browsers */
-    return window.innerHeight;
-  } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-    /* IE6+ */
-    return document.documentElement.clientHeight;
-  } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-    /* IE 4 compatible */
-    return document.body.clientHeight;
-  }
-}
-
-/* 13px font + 4px padding/margin */
 var lineHeight = 17;
-
-var monitorHeight = getHeight();
-
+var monitorHeight = window.innerHeight;
 var numberOfLines = Math.floor(monitorHeight / lineHeight) - 1;
 if (numberOfLines < 3) numberOfLines = 3;
-
-/* Red background after 30 seconds of
-   inactivity (no data received) */
 var timeoutThreshold = 30;
 var timeout = 0;
-
 var monitor = [];
 var counter = 0;
-
 var div = '';
-
 var screenChanged = false;
+var filterMenu = false;
+var filterText = '';
+var inputMinSize = 200;
+
+function filter(f) {
+  filterText = f;
+  var w = ((f.length + 1) * 9);
+  if (w > inputMinSize) {
+    document.getElementById('freetext').style.width = w + 'px';
+    document.getElementById('freetext').style.minWidth = w + 'px';
+    document.getElementById('freetext').style.maxWidth = w + 'px';
+  } else {
+    document.getElementById('freetext').style.width = inputMinSize + 'px';
+    document.getElementById('freetext').style.minWidth = inputMinSize + 'px';
+    document.getElementById('freetext').style.maxWidth = inputMinSize + 'px';
+  }
+  //document.getElementById('debug').innerHTML = '' + f;
+}
 
 function updateMonitor(dataReceived) {
   monitor[counter] = dataReceived;
@@ -70,7 +64,6 @@ function updateMonitor(dataReceived) {
     if (counter > numberOfLines) counter = numberOfLines;
   }
   document.getElementById('monitor').innerHTML = '' + div;
-  /* 'terminal rotation' within numberOfLines */
   if (counter < (numberOfLines - 1)) {
     counter += 1;
   } else {
@@ -79,22 +72,115 @@ function updateMonitor(dataReceived) {
   timeout = 0;
 }
 
-/* Open the WebSocket connection. */
 var host = window.document.location.host.replace(/:.*/, '');
-var ws = new WebSocket('ws://' + host + ':' + location.port);
+ws = new ReconnectingWebSocket('ws://' + host + ':' + location.port);
+ws.reconnectInterval = 10000;
 ws.onmessage = function (event) {
-  updateMonitor(event.data);
+  var d = '' + event.data;
+  var m = d.split(' ');
+  /* Not enough data fields received? Skip. */
+  if (m.length > 3) {
+    var elapsed = parseFloat(m[1]);
+    /* Unusable data received? Skip. */
+    if (!isNaN(elapsed)) {
+      var f = filterText.replace(/\s+$/, '').split(' ');
+      /* Cycle through the filter arguments, prove to not to be filtered out */ 
+      var filterShow = true;
+      var filterANDCycles = f.length;
+      for (nn = 0; nn < filterANDCycles; nn++) {
+        var ft = f[nn];
+        var filterNegate = false;
+        var filterElapsed = false;
+        var filterGt = false;
+        var filterSt = false;
+        var filterThreshold = 0.0;
+        if (ft[0] == '!') {
+          ft = ft.replace(/\!/, '');
+          filterNegate = true;
+        }
+        if (ft[0] == '>') {
+          ft = ft.replace(/\>/, '');
+          filterElapsed = true;
+          filterGt = true;
+        } else {
+          filterGt = false;
+        }
+        if (ft[0] == '<') {
+          ft = ft.replace(/\</, '');
+          filterElapsed = true;
+          filterSt = true;
+        } else {
+          filterSt = false;
+        }
+        if (filterElapsed) {
+          filterThreshold = parseFloat(ft);
+          if (isNaN(filterThreshold)) filterThreshold = 0.0;
+          ft = '';
+        }
+        if (ft.length == 0 && !filterElapsed) {
+          filterShow = true;
+        } else {
+          if (filterGt) {
+            if (elapsed > filterThreshold) {
+              // nothing
+            } else {
+              filterShow = false;
+            }
+          }
+          if (filterSt) { 
+            if (elapsed < filterThreshold) {
+              // nothing
+            } else {
+              filterShow = false;
+            }
+          }
+          if (!filterElapsed) {
+            if (ft.indexOf('|') > 0) {
+              var ff = ft.replace(/\|$/, '').split('|');
+              /* Cycle through the OR agruments, prove to not to be filtered out */
+              var filterORCycles = ff.length;
+              var filterORShow = false;
+              for (nnn = 0; nnn < filterORCycles; nnn++) {
+                var ftt = ff[nnn];
+                if (d.indexOf(ftt) > 0) {
+                  filterORShow = true;
+                } else {
+                  // nothing
+                }
+              }
+              if (!filterORShow) filterShow = false;
+            } else {
+              if (filterNegate) {
+                if (d.indexOf(ft) < 0) {
+                  // nothing
+                } else {
+                  filterShow = false;
+                }
+              } else {
+                if (d.indexOf(ft) > 0) {
+                  // nothing
+                } else {
+                  filterShow = false;
+                }
+              }
+            }
+          }
+        }
+      }  // for loop nn
+      if (filterText.indexOf('#') == 0) filterShow = true;
+      if (filterShow) updateMonitor(d);
+    }
+  }
 };
 
 window.onresize = function() {
-  monitorHeight = getHeight();
+  monitorHeight = window.innerHeight;
   var newNumberOfLines = Math.floor(monitorHeight / lineHeight) - 1;
   if (newNumberOfLines < 3) newNumberOfLines = 3;
   numberOfLines = newNumberOfLines;
   screenChanged = true;
 }
 
-/* Preparation for filter menu */
 function handleKeyDown(e) {
   var ctrlPressed = 0;
   var altPressed = 0;
@@ -108,20 +194,48 @@ function handleKeyDown(e) {
     + ", altKey=" + altPressed 
     + ", ctrlKey=" + ctrlPressed;
   /* Ctrl+Alt+F */
-  if ((altPressed || ctrlPressed) && evt.keyCode == 70) alert('Filter menu not available');
+  if ((altPressed || ctrlPressed) && evt.keyCode == 70) {
+     if (filterMenu) {
+        document.getElementById("overlay").style.transition = 'opacity 0.4s';
+        document.getElementById("filter").style.transition = 'opacity 0.5s';
+        document.getElementById("overlay").style.opacity = '0.0';
+        document.getElementById("filter").style.opacity = '0.0';
+        filterMenu = false;
+      } else {
+        document.getElementById("overlay").style.transition = 'opacity 0.5s';
+        document.getElementById("filter").style.transition = 'opacity 0.5s';
+        document.getElementById("overlay").style.opacity = '0.4';
+        document.getElementById("filter").style.opacity = '0.9';
+        document.getElementById("freetext").focus();
+        filterMenu = true;
+      }
+  }
   return true;
 }
 
 document.onkeydown = handleKeyDown;
 
-/* Turn background into red after temoutThreshold,
-   and turn into black again on new data  */
+/* 1 Second checks: Update background + Update filter alert */
+var state = 0;
 setInterval(function() {
   if (timeout > timeoutThreshold) { 
     document.getElementById("l2").style.transition = 'all 0.5s';
-    document.getElementById("l2").style.background = '#400';
+    document.getElementById("l2").style.background = '#700';
   } else {
     document.getElementById("l2").style.background = 'black';
     timeout++;
+  }
+  if ((filterText.length > 0) && (filterText.indexOf('#') != 0)) {
+    document.getElementById("filteralert").style.transition = 'all 0.9s';
+    document.getElementById("filteralert").style.opacity = '0.9';
+    if (state == 0) {
+      document.getElementById("filteralert").style.background = '#fe0';
+      state = 1;
+    } else {
+      document.getElementById("filteralert").style.background = '#330';
+      state = 0;
+    }
+  } else {
+    document.getElementById("filteralert").style.opacity = '0';
   }
 }, 1000);
