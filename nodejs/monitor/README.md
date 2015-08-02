@@ -46,7 +46,7 @@ Data that comes in via 6969 is broadcast _directly_ to every connected WebSocket
 
 For ease of development, I've included a small Gulp set-up:
 
-    gulp watch:js
+    gulp watch:js watch:html wacth:css
 
 # NGINX Access Log
 
