@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
+/*
 process.on('uncaughtException', function(err) {
   console.error('Server canceled: port(s) already in use?');
   process.exit();
 });
+*/
 
 var host = '127.0.0.1';
 if (process.argv.indexOf("-h") != -1) {
@@ -48,7 +50,7 @@ net.createServer(function(sock) {
     var dataToSend = '' + data;
     dataToSend = dataToSend.replace(/(\r\n|\n|\r)/, '');
     var monData = dataToSend.split(' ');
-    if (mon_data.length > 4) {
+    if (monData.length > 7) {
       var ipAddress = monData[2];
       var timeStamp = '' + monData[0].substring(12);
       var request = monData[4] + monData[7];

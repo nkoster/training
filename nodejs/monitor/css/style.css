@@ -78,11 +78,11 @@ body {
   z-index: 25;
   position: fixed;
   overflow: hidden;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   padding: 5px;
-  width: 10px;
-  height: 10px;
+  width: 4px;
+  height: 4px;
   background: #f90;
   border-radius: 50%;
   color: black;
@@ -90,8 +90,25 @@ body {
   text-align: center;
   opacity: 0.0;
   color: black;
-  font-size: 10px;
+  font-size: 15px;
   font-weight: bold;
+}
+
+#alarmalert {
+  z-index: 26;
+  position: fixed;
+  overflow: hidden;
+  top: 2px;
+  right: 2px;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  opacity: 0.0;
+  font-size: 13px;
+  font-weight: normal;
+  color: #f00;
+  text-shadow: 0 1px 10px black;
 }
 
 #filter {
