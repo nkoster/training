@@ -2,7 +2,7 @@
 
 Online project example: [http://141.138.138.250/](http://141.138.138.250/)
 
-(More detailed: https://github.com/Portavita/scrolling-lines/blob/master/README.md)
+(More detailed information: https://github.com/Portavita/scrolling-lines/blob/master/README.md)
 
 The idea is: read the NGINX access log, and pipe it via Netcat into this NodeJS monitor example, and broadcast it via the WebSocket protocol to all connected browsers via an URL, thus `nc 127.0.0.1 6969`  _directly_ to http://127.0.0.1:8080
 
