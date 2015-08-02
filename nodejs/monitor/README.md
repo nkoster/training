@@ -30,17 +30,9 @@ You can omit the arguments in case you want to use the default values, this is a
 
 Test:
 
-    echo hello | nc 127.0.0.1 6969
-
-or
-
-    for n in {1..25} ; do echo $(date) | nc 127.0.0.1 6969 ; sleep 1 ; done
-
-or
-
     sudo tail -F /var/log/nginx/access_log | nc 127.0.0.1 6969
 
-or even from a remote web server
+or from a remote web server
 
     ssh webserver 'tail -F /var/log/nginx/access_log' | nc 127.0.0.1 6969
 
