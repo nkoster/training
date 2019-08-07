@@ -6,13 +6,11 @@ function yesno() {
 }
 
 async function msg() {
-    let result
     try {
-        result = await yesno()
+        return await yesno()
     } catch (err) {
-        result = err
+        return err
     }
-    return result
 }
 
 msg().then(d => console.log(d), e => console.error(e))
