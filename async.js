@@ -4,4 +4,4 @@ async function f(t) {
     })
 }
 
-f(5000).then(d => console.log(d))
+f(5000).then(d => console.log(d), e => console.error(e))
