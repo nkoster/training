@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>keys</title>
+</head>
+<body>
+<input type="text" id="in">
+<div id="aap"></div>
+<script>
+var messages = []
+var current = 0
+var message = document.getElementById('in')
+var aap = document.getElementById('aap')
+message.onkeydown = function(e) {
+    switch(e.keyCode) {
+        case 38:
+            console.log('ARROW UP')
+            if (current > 0) current--
+            message.value = messages[current]
+            break
+        case 40:
+            console.log('ARROW DOWN')
+            if (current < messages.length - 1) {
+                current++
+                message.value = messages[current]  
+            }
+            break
+        case 8:
+            console.log('BACKSPACE')
+            break
+        case 9:
+            e.preventDefault()
+            console.log('TAB')
+            break
+        case 13:
+            e.preventDefault()
+            if (message.value.length > 0) {
+                messages[current] = message.value
+                messages.push('')
+                message.value = ''
+                current++
+            }
+            console.log('ENTER')
+            break
+        default:
+            console.log('keycode', e.keyCode)
+    }
+    console.log(messages)
+}
+message.onkeyup = function(e) {
+    aap.innerText = message.value
+    messages[current] = message.value
+    console.log('current', current)
+}
+message.onfocus = message.onkeyup
+message.onblur = message.onkeyup
+</script>
+</body>
+</html>
