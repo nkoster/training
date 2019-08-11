@@ -36,10 +36,14 @@ message.onkeydown = function(e) {
         case 13:
             e.preventDefault()
             if (message.value.length > 0) {
-                messages[current] = message.value
+                // messages[current] = message.value
+                // messages.push('')
+                // message.value = ''
+                // current++
+                messages[messages.length - 1] = message.value
                 messages.push('')
                 message.value = ''
-                current++
+                current = messages.length - 1
             }
             console.log('ENTER')
             break
@@ -51,7 +55,7 @@ message.onkeydown = function(e) {
 message.onkeyup = function(e) {
     aap.innerText = message.value
     messages[current] = message.value
-    console.log('current', current)
+    console.log('current', current, 'length', messages.length - 1)
 }
 message.onfocus = message.onkeyup
 message.onblur = message.onkeyup
