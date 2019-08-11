@@ -36,10 +36,6 @@ message.onkeydown = function(e) {
         case 13:
             e.preventDefault()
             if (message.value.length > 0) {
-                // messages[current] = message.value
-                // messages.push('')
-                // message.value = ''
-                // current++
                 messages[messages.length - 1] = message.value
                 messages.push('')
                 message.value = ''
