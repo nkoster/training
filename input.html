@@ -8,11 +8,13 @@
 <input type="text" id="in">
 <div id="aap"></div>
 <script>
-var debug = false
+var debug = true
 var messageBuffer = []
 var messageBufferIndex = 0
 var message = document.getElementById('in')
 var aap = document.getElementById('aap')
+var userList = ['gijs', 'henk', 'willem']
+document.write(userList)
 message.onkeydown = function(e) {
     switch(e.keyCode) {
         case 8:
@@ -21,6 +23,16 @@ message.onkeydown = function(e) {
         case 9:
             e.preventDefault()
             if (debug) console.log('TAB')
+            var messageWords = message.value.split(' ')
+            var searchInput = messageWords[messageWords.length -1]
+            var user = []
+            userList.forEach(function(element) {
+                if (element.includes(searchInput)) user.push(element)
+            })
+            if (user.length === 1) {
+                messageWords[messageWords.length - 1] = user[0]
+                message.value = messageWords.join(' ')
+            }
             break
         case 13:
             e.preventDefault()
