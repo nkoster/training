@@ -37,8 +37,10 @@ message.onkeydown = function(e) {
         case 13:
             e.preventDefault()
             if (message.value.length > 0) {
-                messageBuffer[messageBuffer.length - 1] = message.value
-                messageBuffer.push('')
+                if (messageBuffer[messageBuffer.length - 2] !== message.value) {
+                    messageBuffer[messageBuffer.length - 1] = message.value
+                    messageBuffer.push('')
+                }
                 message.value = ''
                 messageBufferIndex = messageBuffer.length - 1
             }
