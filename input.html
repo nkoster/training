@@ -14,8 +14,10 @@ var messageBufferIndex = 0
 var message = document.getElementById('in')
 var aap = document.getElementById('aap')
 var userList = ['gijs', 'henk', 'willem']
+var searchHistory = false
 document.write(userList)
 message.onkeydown = function(e) {
+    if (e.ctrlKey) e.preventDefault()
     switch(e.keyCode) {
         case 8:
             if (debug) console.log('BACKSPACE')
@@ -36,6 +38,8 @@ message.onkeydown = function(e) {
             break
         case 13:
             e.preventDefault()
+            searchHistory = false
+            if (debug) console.log('SEARCH STOPPED')
             if (message.value.length > 0) {
                 if (messageBuffer[messageBuffer.length - 2] !== message.value) {
                     messageBuffer[messageBuffer.length - 1] = message.value
@@ -46,27 +50,64 @@ message.onkeydown = function(e) {
             }
             if (debug) console.log('ENTER')
             break
+        case 82:
+            if (e.ctrlKey) {
+                if (debug) console.log('CTRL-R')
+                searchHistory = true
+                if (debug) console.log('SEARCH STARTED')
+            }
+            break
+        case 27:
+            if (debug) console.log('ESC')
+            if (searchHistory) {
+                searchHistory = false
+                if (debug) console.log('SEARCH STOPPED')
+            }
+            break
         case 38:
             if (debug) console.log('ARROW UP')
-            if (messageBufferIndex > 0) messageBufferIndex--
-            message.value = messageBuffer[messageBufferIndex]
+            if (!searchHistory) {
+                if (messageBufferIndex > 0) messageBufferIndex--
+                message.value = messageBuffer[messageBufferIndex]
+            }
             break
         case 40:
             if (debug) console.log('ARROW DOWN')
-            if (messageBufferIndex < messageBuffer.length - 1) {
-                messageBufferIndex++
-                message.value = messageBuffer[messageBufferIndex]  
+            if (!searchHistory) {            
+                if (messageBufferIndex < messageBuffer.length - 1) {
+                    messageBufferIndex++
+                    message.value = messageBuffer[messageBufferIndex]  
+                }
             }
             break
         default:
             if (debug) console.log('keycode', e.keyCode)
+            if (searchHistory) {
+                if (message.value.length > 0) {
+                    var history = messageBuffer.slice(0, -1)
+                    var found = []
+                    console.log('history', history)
+                    for (var i=0; i<history.length; i++) {
+                        if (history[i].includes(message.value)) {
+                            found.push(history[i])
+                        }
+                    }
+                    if (found.length > 0) {
+                        if (found.length === 1) {
+                            e.preventDefault()
+                            message.value = found[0]
+                        }
+                        console.log('found', found[0])
+                    }
+                }
+            }
     }
-    if (debug) console.log(messageBuffer)
+    if (debug) console.log(searchHistory, messageBuffer)
 }
 message.onkeyup = function(e) {
     aap.innerText = message.value
     messageBuffer[messageBufferIndex] = message.value
-    if (debug) console.log('messageBufferIndex', messageBufferIndex, 'length', messageBuffer.length - 1)
+    if (debug) console.log('messageBufferIndex', messageBufferIndex, 'length', messageBuffer.length)
 }
 message.onfocus = message.onkeyup
 message.onblur = message.onkeyup
