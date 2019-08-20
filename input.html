@@ -83,7 +83,7 @@ message.onkeydown = function(e) {
         default:
             if (debug) console.log('keycode', e.keyCode)
             if (searchHistory) {
-                if (message.value.length > 0) {
+                if (messageBuffer[messageBuffer.length - 1].length > 0) {
                     var history = messageBuffer.slice(0, -1)
                     var found = []
                     console.log('history', history)
@@ -92,12 +92,13 @@ message.onkeydown = function(e) {
                             found.push(history[i])
                         }
                     }
-                    if (found.length > 0) {
-                        if (found.length === 1) {
+                    var unique = [... new Set(found)]
+                    if (unique.length > 0) {
+                        if (unique.length === 1) {
                             e.preventDefault()
-                            message.value = found[0]
+                            message.value = unique[0]
                         }
-                        console.log('found', found[0])
+                        console.log('found', unique[0])
                     }
                 }
             }
